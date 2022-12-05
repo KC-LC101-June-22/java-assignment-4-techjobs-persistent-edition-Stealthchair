@@ -7,16 +7,16 @@ import java.util.List;
 @Entity
 public class Job extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne // Part 3: Many jobs but can only have 1 employer
     private Employer employer;
 
-    @ManyToMany
+    @ManyToMany // Part 4
     private List<Skill> skills = new ArrayList<>();
 
     public Job() {
     }
 
-    public Job(Employer anEmployer, List<Skill> someSkills) {
+    public Job(Employer anEmployer, List<Skill> someSkills) {   // Part 4: update someSkills type
         super();
         this.employer = anEmployer;
         this.skills = someSkills;

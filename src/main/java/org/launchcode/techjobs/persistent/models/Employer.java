@@ -8,19 +8,22 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity // Part 2: Says to make a table
 public class Employer extends AbstractEntity {
 
+    // Part 2: Add location field with validation
     @NotBlank
-    @Size(min = 3, max = 100)
+    @Size(min = 3, max = 255)
     private String location;
 
-    @OneToMany
-    @JoinColumn(name="employer_id")
+    // Part 3:
+    @OneToMany  // One employer can have many jobs
+    @JoinColumn(name="employer_id") // Join on this column
     private List<Job> jobs = new ArrayList<>();
 
-    public Employer(){}
+    public Employer(){} // Part 2: Hibernate Uses
 
+    // Part 2: Accessors for added location field
     public String getLocation() {
         return location;
     }

@@ -25,6 +25,7 @@ public class ListController {
     @Autowired
     private JobRepository jobRepository;
 
+    // Part 4: and employers and skills
     @Autowired
     private EmployerRepository employerRepository;
 
@@ -43,6 +44,7 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model) {
+        // Part 4: Get all employers and skills and put in the model
         Iterable<Employer> employers;
         employers = employerRepository.findAll();
         Iterable<Skill> skills;

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+
+// Part 2: Copy from EmployerController
 @Controller
 @RequestMapping("skills")
 public class SkillController {

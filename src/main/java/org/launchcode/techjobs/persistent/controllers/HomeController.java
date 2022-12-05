@@ -21,6 +21,8 @@ import java.util.Optional;
  */
 @Controller
 public class HomeController {
+
+    //Part 3: Hold Employers
     @Autowired
     private EmployerRepository employerRepository;
 
@@ -32,22 +34,26 @@ public class HomeController {
 
     @RequestMapping("")
     public String index(Model model) {
-
+        Iterable<Job> jobs;
+        jobs = jobRepository.findAll();
         model.addAttribute("title", "My Jobs");
+        model.addAttribute("jobs", jobs);
 
         return "index";
     }
 
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
+        //Part 3: Grab all employers
         Iterable<Employer> employers;
         employers = employerRepository.findAll();
+
         Iterable<Skill> skills;
         skills = skillRepository.findAll();
 
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
-        model.addAttribute("employers", employers);
+        model.addAttribute("employers", employers); // Part 3: Pass employers to model
         model.addAttribute("skills", skills);
         return "add";
     }
@@ -61,12 +67,13 @@ public class HomeController {
             return "add";
         }
 
-        Optional optEmployer = employerRepository.findById(employerId);
+        Optional optEmployer = employerRepository.findById(employerId); // Part 3: Get specific employer
+        // Part 4: Get the selected skills and add to the new job
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
-            newJob.setEmployer(employer);
+            newJob.setEmployer(employer);   // Part 3: Add employer to new job
 
             jobRepository.save(newJob);
         }
@@ -76,7 +83,12 @@ public class HomeController {
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
+        Optional optJob = jobRepository.findById(jobId);
 
+        if (optJob.isPresent()) {
+            Job job = (Job) optJob.get();
+            model.addAttribute("job", job);
+        }
         return "view";
     }
 

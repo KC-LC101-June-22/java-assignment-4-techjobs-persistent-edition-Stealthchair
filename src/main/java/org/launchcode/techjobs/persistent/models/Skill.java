@@ -9,16 +9,18 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity // Part 2: Says to make a table
 public class Skill extends AbstractEntity {
 
+    // Part 2: Add description field
     @Size(min = 3, max = 1000)
     public String description;
 
+    // Part 4: Skills can belong to many jobs
     @ManyToMany(mappedBy="skills")
     private List<Job> jobs = new ArrayList<>();
 
-    public Skill(){}
+    public Skill(){}    // Part 2: Hibernate uses
 
     public String getDescription() {
         return description;
@@ -28,6 +30,7 @@ public class Skill extends AbstractEntity {
         this.description = description;
     }
 
+    // Part 4: Add accessors for jobs
     public List<Job> getJobs() {
         return jobs;
     }

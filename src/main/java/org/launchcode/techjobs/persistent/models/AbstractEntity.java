@@ -9,15 +9,15 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 
-@MappedSuperclass
+@MappedSuperclass // Part 2: Entities inherit from it but no table is made for this class
 public abstract class AbstractEntity {
 
-    @Id
-    @GeneratedValue
+    @Id             // Part 2: Designates as primary key
+    @GeneratedValue // Part 2: Makes the id field increment automatically
     private int id;
 
-    @NotBlank
-    @Size(min = 3, max = 100)
+    @NotBlank                   // Part 2: Assign validation to name
+    @Size(min = 3, max = 255)
     private String name;
 
     public int getId() {
